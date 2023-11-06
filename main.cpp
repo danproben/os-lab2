@@ -14,8 +14,8 @@
 // constants
 const int N_CARS = 2;
 const int N_RIDERS = 5;
-const int T_WANDER = 100;
-const int T_BUMP = 40;
+const int T_WANDER = 5;
+const int T_BUMP = 10;
 
 // Total number of bumper car rides
 const int COUNT_DOWN = 10;
@@ -199,7 +199,7 @@ void Wander(int rid, int interval)
 
 	// update the wandering status
 	sem_wait(&updateWanderStatus);
-	wanderingStatus[rid - 1] = interval;
+	wanderingStatus[rid - 1] = 1;
 	sem_post(&displaySem);
 	sem_post(&updateWanderStatus);
 
@@ -291,7 +291,7 @@ int Load(int cid)
 void Unload(int cid, int rid)
 {
 
-	// decrement countDown since we unloaded. This counts as a ride
+	// decrement countDown since this counts as a ride
 	sem_wait(&countDownSem);
 	countDown--;
 	sem_post(&displaySem);
@@ -305,6 +305,8 @@ void Unload(int cid, int rid)
 // bump for a random about of time between 0 and T_BUMP
 void Bump(int cid, int interval)
 {
+
+	
 	sleep(interval);
 }
 
@@ -348,13 +350,11 @@ void *Display(void *args)
 		sem_wait(&updateLine);
 		for (int i = frontOfLine; i < backOfLine; i++)
 		{
-
 			if (line[i] > 0)
 			{
 				std::cout << "Rider " << line[i] << " is in line..." << std::endl;
-			}
+			} 
 		}
-
 		sem_post(&updateLine);
 
 		// display which riders are wandering the park
