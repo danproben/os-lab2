@@ -10,7 +10,7 @@ Operating Systems - Lab2: POSIX Threads and Semaphores
 
 ### Explanation of display
 
-The display isgit a separate thread that runs a while loop, waiting on a semaphore to be incremented to output statuses and then decerements it after displaying.
+The display is a separate thread that runs a while loop, waiting on a semaphore to be incremented to output statuses and then decerements it after displaying.
 The display function "clears" the terminal with ANSI escape characters written to std::cout after every pass, so it may appear that nothing is happening when there are no changes to statuses. But, in fact, things are happening (it's not just frozen).
 
 Below is the format of the output.
