@@ -14,8 +14,8 @@
 // constants
 const int N_CARS = 2;
 const int N_RIDERS = 5;
-const int T_WANDER = 5;
-const int T_BUMP = 10;
+const int T_WANDER = 100;
+const int T_BUMP = 40;
 
 // Total number of bumper car rides
 const int COUNT_DOWN = 10;
@@ -306,7 +306,6 @@ void Unload(int cid, int rid)
 void Bump(int cid, int interval)
 {
 
-	
 	sleep(interval);
 }
 
@@ -353,7 +352,7 @@ void *Display(void *args)
 			if (line[i] > 0)
 			{
 				std::cout << "Rider " << line[i] << " is in line..." << std::endl;
-			} 
+			}
 		}
 		sem_post(&updateLine);
 
